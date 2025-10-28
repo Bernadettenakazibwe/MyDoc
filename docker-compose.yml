@@ -1,9 +1,9 @@
-version: "3.9"
+#version: "3.9"
 
 services:
   web:
     build: .
-    container_name: mydoc-web
+    #container_name: mydoc-web
     ports:
       - "8081:80"       # visit http://localhost:8080
     depends_on:
@@ -19,7 +19,7 @@ services:
 
   db:
     image: mysql:5.7
-    container_name: mydoc-db
+    #container_name: mydoc-db
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
