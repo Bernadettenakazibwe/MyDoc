@@ -1,15 +1,11 @@
 <?php
-// Read database configuration from environment variables
 $host = getenv('DB_HOST') ?: 'db';
 $user = getenv('DB_USER') ?: 'root';
-$password = getenv('DB_PASSWORD') ?: 'root';
-$database = getenv('DB_NAME') ?: 'tutorial';
+$pass = getenv('DB_PASSWORD') ?: 'root';
+$db   = getenv('PATIENT_DB') ?: 'tutorial';
 
-// Connect to MySQL
-$con = mysqli_connect($host, $user, $password, $database);
-
-// Check connection
+$con = mysqli_connect($host, $user, $pass, $db);
 if (!$con) {
-    die("Database connection failed: " . mysqli_connect_error());
+    die("Connection failed (patient DB): " . mysqli_connect_error());
 }
 ?>
