@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    container_name: mydoc-web
+    ports:
+      - "8081:80"       # visit http://localhost:8080
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      DB_NAME: ${MYSQL_DATABASE}
+    # Uncomment for live code sync during dev
+    # volumes:
+    #   - .:/var/www/html
+
+  db:
+    image: mysql:5.7
+    container_name: mydoc-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "3307:3306"     # optional: access MySQL from host as localhost:3307
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d  # auto-import .sql on first start
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
